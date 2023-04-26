@@ -66,6 +66,5 @@ void procesoArchivo(char *archivo){
     //     cout<<endl
     //         <<archivo<<" (sin info)"<<endl;
     // }
-
-
+    }
 }
