@@ -5,7 +5,7 @@ class ListaLigada{
         Archivo *Head;
     public: 
         int cantidadArchivos;
-        
+
         ListaLigada(){
             this->Head = nullptr;
             this->cantidadArchivos=0;
@@ -49,7 +49,7 @@ class ListaLigada{
                 cout<<endl
                     <<"Peso: "<<nodoAuxiliar->peso
                     <<endl
-                    <<"Nombre del archivo: "<<nodoAuxiliar->nombre
+                    <<"Nombre del archivos: "<<nodoAuxiliar->nombre
                     <<endl;
                 nodoAuxiliar = nodoAuxiliar->siguiente;
             }
