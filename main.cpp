@@ -37,9 +37,16 @@ int main(){
     closedir(dir);
 
     
+    cout<<endl<<"Lista desordenada"<<endl;
     cout<<lista.cantidadArchivos<<endl;
     lista.mostrarArchivos();
     
+
+    lista.ordenamiento();
+
+    cout<<endl<<"Lista ordenada"<<endl;
+    cout<<lista.cantidadArchivos<<endl;
+    lista.mostrarArchivos();
 
 
     return EXIT_SUCCESS;
