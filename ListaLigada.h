@@ -99,7 +99,18 @@ class ListaLigada{
                     obj1 = buscarArchivoPorPosicion(i);
                     obj2 = buscarArchivoPorPosicion(j);
                     
-                    if(obj1->peso > obj2->peso){
+                    if(esIgualPesoArchivos(obj1->peso, obj2->peso) || compararArchivos(obj1->nombre, obj2->nombre)){
+                        cout<<"obj1->nombe: "<<obj1->nombre<<"obj2->nombre: "<<obj2->nombre<<endl;
+                        if(obj2->nombre!="ListaLigada.h" && obj2->nombre!="main.cpp" && obj2->nombre!="main.exe" && obj2->nombre!="Archivo.h" && obj2->nombre!="README.md"){
+                            moverArchivo(obj2->nombre);
+                            eliminarPorPosicion(j);
+                            j=0;
+                        }else{
+                            moverArchivo(obj1->nombre);
+                            eliminarPorPosicion(i);
+                        }
+                        i=0;
+                    }else if(obj1->peso > obj2->peso){
                         temp.peso = obj1->peso;
                         temp.nombre = obj1->nombre;
 
@@ -108,12 +119,10 @@ class ListaLigada{
 
                         obj2->peso = temp.peso;
                         obj2->nombre = temp.nombre;
-                    }else if(esIgualPesoArchivos(obj1->peso, obj2->peso) && compararArchivos(obj1->nombre, obj2->nombre)){
-                        moverArchivo(obj2->nombre);
-                        eliminarPorPosicion(j);
                     }
                 }
             }
+            
         }
 
         void moverArchivo(string &nombreArchivo){
@@ -146,15 +155,29 @@ class ListaLigada{
         }
 
         bool compararArchivos(string &archivo1, string &archivo2){
-            ifstream f1(archivo1, ifstream::binary);
-            ifstream f2(archivo2, ifstream::binary);
+            ifstream f1(archivo1);
+            ifstream f2(archivo2);
 
             if(f1.fail() && f2.fail()){
                 cout<<endl<<"Error al abrir los archivos a comparar"<<endl;
                 return false;
             }
-            return equal(istreambuf_iterator<char>(f1.rdbuf()),
-                            istreambuf_iterator<char>(),
-                            istreambuf_iterator<char>(f2.rdbuf()));
+
+            char caracter;
+            char caracter2;
+            string file1_contenido, file2_contenido;
+            
+            while(f1.get(caracter)){
+                if(caracter != 32 && caracter != '\n'){
+                    file1_contenido += caracter;
+                }
+            }
+            while(f2.get(caracter2)){
+                if(caracter2 != 32 && caracter2 != '\n'){
+                    file2_contenido += caracter2;
+                }
+            }
+
+            return file1_contenido==file2_contenido;
         }
 };

@@ -44,6 +44,7 @@ int main(){
 
     lista.ordenamiento();
 
+
     cout<<endl<<"Lista ordenada"<<endl;
     cout<<lista.cantidadArchivos<<endl;
     lista.mostrarArchivos();
@@ -63,7 +64,7 @@ void procesoArchivo(char *archivo){
 
     fich = fopen(archivo, "r");
     if(fich){
-        fseek(fich, 0L, SEEK_END);
+        fseek(fich, 0, SEEK_END);
         ftam = ftell(fich);
         fclose(fich);
         
